@@ -1,0 +1,13 @@
+package com.example.Bezbednost;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class BezbednostApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
