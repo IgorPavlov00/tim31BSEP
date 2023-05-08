@@ -9,9 +9,6 @@
         <module name="Bezbednost" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Bezbednost" target="17" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
