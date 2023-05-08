@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 
 import {KorisnikService} from "../korisnik.service";
 import {HttpErrorResponse} from "@angular/common/http";
@@ -6,6 +6,7 @@ import {NgForm} from "@angular/forms";
 import {Korisnik} from "../korisnik";
 
 
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-admin',
@@ -13,6 +14,8 @@ import {Korisnik} from "../korisnik";
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent {
+
+  @ViewChild('addForm', { static: true }) addForm!: NgForm;
   title = 'frontend';
   public radnici: Korisnik[] | undefined;
   deleteEmployee: Korisnik | undefined;

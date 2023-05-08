@@ -76,7 +76,7 @@
                       </div>
                       <br>
                       <div class="form-group mt-2">
-                        <input type="text" ngModel name="lozinka" class="form-style" placeholder="Your password" id="email"
+                        <input type="text" ngModel pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{12,}$" name="lozinka" maxlength="12" class="form-style" placeholder="Your password" id="email"
                         >
                         <i class="input-icon uil uil-at"></i>
                       </div>

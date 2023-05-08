@@ -76,22 +76,71 @@ export class LoginComponent {
   // }
 
 
+  // addUser(addForm: NgForm) {
+  //   // @ts-ignore
+  //   addForm.value.uloga='user';
+  //   const password = addForm.value.password;
+  //   if (this.passwordPreventCommon(password)) {
+  //     alert("Your password is too common. Please choose a different password.");
+  //     return;
+  //   }
+  //   this.rad.addKorisnik(addForm.value).subscribe(
+  //     (response: Korisnik) => {
+  //       console.log(response);
+  //       this.rad.getKorisnici();
+  //       addForm.reset();
+  //       alert("uspesno ste se registrovali!");
+  //     },
+  //     (error: HttpErrorResponse) => {
+  //       alert(error.message);
+  //       addForm.reset();
+  //     }
+  //   );
+  //
+  // }
+
   addUser(addForm: NgForm) {
     // @ts-ignore
     addForm.value.uloga='user';
-
-    this.rad.addKorisnik(addForm.value).subscribe(
-      (response: Korisnik) => {
-        console.log(response);
-        this.rad.getKorisnici();
-        addForm.reset();
-        alert("uspesno ste se registrovali!");
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-        addForm.reset();
-      }
-    );
-
+    const password = this.korisnik.lozinka;
+    console.log(password);
+    if (this.passwordPreventCommon(password)) {
+      alert("Your password is too common. Please choose a different password.");
+      return;
+    } else {
+      this.rad.addKorisnik(addForm.value).subscribe(
+        (response: Korisnik) => {
+          console.log(response);
+          this.rad.getKorisnici();
+          addForm.reset();
+          alert("uspesno ste se registrovali!");
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+          addForm.reset();
+        }
+      );
+    }
   }
+
+  passwordPreventCommon(password: string): boolean {
+    const commonPasswords = [
+      '123',
+      'password',
+      '12345678',
+      // Add other commonly used passwords here
+    ];
+
+    if (commonPasswords.includes(password)) {
+      alert("Your password is too common. Please choose a different password.");
+      setTimeout(() => {
+        console.log('Alert dismissed');
+      }, 3000); // Delay execution of next line of code by 3 seconds
+      return true;
+    }
+
+    return false;
+  }
+
+
 }
