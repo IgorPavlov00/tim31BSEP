@@ -52,6 +52,7 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+
             }
           },
           "defaultConfiguration": "production"
@@ -63,7 +64,10 @@
               "browserTarget": "frontend:build:production"
             },
             "development": {
-              "browserTarget": "frontend:build:development"
+              "browserTarget": "frontend:build:development",
+              "sslKey": "ssl/tls.key",
+              "sslCert": "ssl/tls.crt",
+              "ssl": true
             }
           },
           "defaultConfiguration": "development"

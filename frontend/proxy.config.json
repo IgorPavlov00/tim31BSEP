@@ -1,0 +1,8 @@
+{
+  "/bezbednost/*":{
+    "target": "https://localhost:8084",
+    "secure": true,
+    "changeOrigin":true,
+    "logLevel" : "debug"
+  }
+}

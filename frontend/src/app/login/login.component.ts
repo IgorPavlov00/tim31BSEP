@@ -6,6 +6,7 @@ import { Router } from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
 import {KorisnikService} from "../korisnik.service";
 import { ValidatorFn } from '@angular/forms';
+import {CSRRequest} from "../user/csrRequest";
 
 export function passwordValidator(): ValidatorFn {
   return (control: AbstractControl): {[key: string]: any} | null => {
@@ -29,7 +30,7 @@ export class LoginComponent {
   email: string | undefined;
 
   korisnik:Korisnik=new Korisnik();
-
+  public csrFile:any;
   constructor(
     private loginservice: LoginService,
     private router: Router,
@@ -108,6 +109,21 @@ export class LoginComponent {
       alert("Your password is too common. Please choose a different password.");
       return;
     } else {
+      let csrRequest: CSRRequest = addForm.value;
+      this.rad.register(csrRequest,this.csrFile).subscribe(
+        {
+          next:(res)=>{
+            // this.toastrService.success("Request successfully send.");
+            this.router.navigateByUrl("anon/login");
+
+          },
+          error:(err)=>{
+            // this.toastrService.warning("Something went wrong, please try again!");
+          }
+        }
+      )
+
+
       this.rad.addKorisnik(addForm.value).subscribe(
         (response: Korisnik) => {
           console.log(response);
@@ -142,5 +158,9 @@ export class LoginComponent {
     return false;
   }
 
-
+  public onBasicUpload(event:any){
+    console.log(event.target.files);
+    this.csrFile = event.target.files[0];
+    console.log(this.csrFile);
+  }
 }

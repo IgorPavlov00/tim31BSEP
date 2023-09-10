@@ -11,10 +11,12 @@ import { LoginComponent } from './login/login.component';
 import {RouterModule, Routes} from "@angular/router";
 import { AdminComponent } from './admin/admin.component';
 import { UserComponent } from './user/user.component';
+import { CsrrequestComponent } from './csrrequest/csrrequest.component';
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'user', component: UserComponent },
+  { path: 'csrrequests', component: CsrrequestComponent },
 
 ];
 @NgModule({
@@ -22,7 +24,8 @@ const routes: Routes = [
     AppComponent,
     LoginComponent,
     AdminComponent,
-    UserComponent
+    UserComponent,
+    CsrrequestComponent
 
   ],
   imports: [

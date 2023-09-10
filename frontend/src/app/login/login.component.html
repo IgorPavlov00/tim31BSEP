@@ -82,6 +82,11 @@
                       </div>
                       <br>
 
+                      <h4 style="color: white">CSR File:</h4>
+                      <div class="form-group mt-2">
+                        <input type="file" id="file" (change)="onBasicUpload($event)" accept=".csr">
+                      </div>
+
                   <div class="form-group" style="visibility: hidden">
                     <input type="text" value="user" name="uloga" class="form-style" placeholder="Role" id="uloga"
                             readonly>

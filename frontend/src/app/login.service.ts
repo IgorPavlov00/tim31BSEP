@@ -8,7 +8,7 @@ import {Korisnik} from "./korisnik";
   providedIn: 'root'
 })
 export class LoginService {
-  private apiUrl = 'http://localhost:8084';
+  private apiUrl = 'https://localhost:8084';
 
   constructor(private http: HttpClient) {}
 

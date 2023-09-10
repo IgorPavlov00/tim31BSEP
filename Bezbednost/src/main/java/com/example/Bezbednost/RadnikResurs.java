@@ -1,30 +1,24 @@
 package com.example.Bezbednost;
 
 import com.example.Bezbednost.model.Korisnik;
-import com.example.Bezbednost.model.LoginDTO;
-import com.example.Bezbednost.model.LoginResponseDTO;
 
-import com.example.Bezbednost.model.RegisterDTO;
 import com.example.Bezbednost.repo.KorisnikRepo;
 
 import com.example.Bezbednost.servis.KorisnikServis;
-import com.example.Bezbednost.servis.KorisnikServis;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.swing.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
 @RestController
 //@RequestMapping("")
@@ -43,6 +37,10 @@ public class RadnikResurs {
     public RadnikResurs(KorisnikServis radnikServis) {
         this.radnikServis = radnikServis;
     }
+    @Autowired
+    public JavaMailSender emailSender;
+
+
 
     @GetMapping("/hello")
     public String pozdrav(){
@@ -94,6 +92,25 @@ public class RadnikResurs {
         return (ResponseEntity<?>)ResponseEntity.internalServerError();
 
     }
+
+//    @Override
+//    public void register(CSRRequestDTO requestDTO, MultipartFile document, HttpServletRequest request) throws IOException {
+//        CSRRequest csrRequest = new CSRRequest();
+//        csrRequest.setEmail(requestDTO.getEmail());
+//        csrRequest.setFirstName(requestDTO.getFirstName());
+//        csrRequest.setLastName(requestDTO.getLastName());
+//        csrRequest.setTimestamp(LocalDateTime.now());
+//
+//        String filePath = "src/main/resources/data/csr/"+requestDTO.getEmail()+".csr";
+//        File path = new File(filePath);
+//        path.createNewFile();
+//        FileOutputStream output = new FileOutputStream(path);
+//        output.write(document.getBytes());
+//        output.close();
+//
+//        logService.addInfo(new LogDTO(LogAction.CREATING_NEW_CSR_REQUEST, CLS_NAME, "Creating new csr request for user: " + requestDTO.getEmail(), HttpUtils.getRequestIP(request)));
+//        csrRequestRepository.save(csrRequest);
+//    }
 
 //    @PostMapping("/login")
 //    public ResponseEntity<?>login(@RequestBody Korisnik r){
