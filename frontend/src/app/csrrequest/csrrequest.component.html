@@ -1,86 +1,28 @@
-<h2>Responsive Table</h2>
-<div class="table-wrapper">
-  <table class="fl-table">
-    <thead>
-    <tr>
-      <th>Header 1</th>
-      <th>Header 2</th>
-      <th>Header 3</th>
-      <th>Header 4</th>
-      <th>Header 5</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td>Content 1</td>
-      <td>Content 1</td>
-      <td>Content 1</td>
-      <td>Content 1</td>
-      <td>Content 1</td>
-    </tr>
-    <tr>
-      <td>Content 2</td>
-      <td>Content 2</td>
-      <td>Content 2</td>
-      <td>Content 2</td>
-      <td>Content 2</td>
-    </tr>
-    <tr>
-      <td>Content 3</td>
-      <td>Content 3</td>
-      <td>Content 3</td>
-      <td>Content 3</td>
-      <td>Content 3</td>
-    </tr>
-    <tr>
-      <td>Content 4</td>
-      <td>Content 4</td>
-      <td>Content 4</td>
-      <td>Content 4</td>
-      <td>Content 4</td>
-    </tr>
-    <tr>
-      <td>Content 5</td>
-      <td>Content 5</td>
-      <td>Content 5</td>
-      <td>Content 5</td>
-      <td>Content 5</td>
-    </tr>
-    <tr>
-      <td>Content 6</td>
-      <td>Content 6</td>
-      <td>Content 6</td>
-      <td>Content 6</td>
-      <td>Content 6</td>
-    </tr>
-    <tr>
-      <td>Content 7</td>
-      <td>Content 7</td>
-      <td>Content 7</td>
-      <td>Content 7</td>
-      <td>Content 7</td>
-    </tr>
-    <tr>
-      <td>Content 8</td>
-      <td>Content 8</td>
-      <td>Content 8</td>
-      <td>Content 8</td>
-      <td>Content 8</td>
-    </tr>
-    <tr>
-      <td>Content 9</td>
-      <td>Content 9</td>
-      <td>Content 9</td>
-      <td>Content 9</td>
-      <td>Content 9</td>
-    </tr>
-    <tr>
-      <td>Content 10</td>
-      <td>Content 10</td>
-      <td>Content 10</td>
-      <td>Content 10</td>
-      <td>Content 10</td>
-    </tr>
-    <tbody>
-  </table>
+<div class="container">
+  <form >
+    <h4>Contact us today, and get reply with in 24 hours!</h4>
+    <fieldset>
+      <input placeholder="Common name" type="text" tabindex="1" [(ngModel)]="formData.commonName" name="commonName" required autofocus>
+    </fieldset>
+    <fieldset>
+      <input placeholder="Organization unit" type="email" name="organizationUnit" [(ngModel)]="formData.organizationUnit" tabindex="2" required>
+    </fieldset>
+    <fieldset>
+      <input placeholder="Organization name" type="tel" name="organizationName" [(ngModel)]="formData.organizationName" tabindex="3" required>
+    </fieldset>
+    <fieldset>
+      <input placeholder="Locality name" type="url" name="localityName" [(ngModel)]="formData.localityName" tabindex="4" required>
+    </fieldset>
+    <fieldset>
+      <input placeholder="State name" type="tel" name="stateName" [(ngModel)]="formData.stateName" tabindex="3" required>
+    </fieldset>
+    <fieldset>
+      <input placeholder="Country name" type="url" name="countryName" [(ngModel)]="formData.countryName" tabindex="4" required>
+    </fieldset>
+    <fieldset>
+      <button name="submit" type="submit" (click)="AddRequest()" id="contact-submit" data-submit="...Sending">Submit</button>
+    </fieldset>
+  </form>
+
+
 </div>

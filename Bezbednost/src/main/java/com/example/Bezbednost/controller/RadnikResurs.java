@@ -1,5 +1,7 @@
-package com.example.Bezbednost;
+package com.example.Bezbednost.controller;
 
+import com.example.Bezbednost.model.CrtCertificate;
+import com.example.Bezbednost.model.FormData;
 import com.example.Bezbednost.model.Korisnik;
 
 import com.example.Bezbednost.repo.KorisnikRepo;
@@ -8,26 +10,24 @@ import com.example.Bezbednost.servis.KorisnikServis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-//@RequestMapping("")
+
+
+
+//@CrossOrigin(origins = "*", originPatterns = "*", allowedHeaders = "*")
+@RequestMapping("/radnik")
 public class RadnikResurs {
 
     private static final int MAX_FAILED_ATTEMPTS = 2;
     private static final int MAX_LOGIN_ATTEMPTS = 3;
     private static final long LOCKOUT_TIME_MINUTES = 5;
-    private final KorisnikServis radnikServis;
+    private final KorisnikServis korisnikServis;
     @Autowired
     private KorisnikRepo radnikRepo;
 
@@ -35,7 +35,7 @@ public class RadnikResurs {
     PasswordEncoder encoder;
 
     public RadnikResurs(KorisnikServis radnikServis) {
-        this.radnikServis = radnikServis;
+        this.korisnikServis = radnikServis;
     }
     @Autowired
     public JavaMailSender emailSender;
@@ -47,37 +47,63 @@ public class RadnikResurs {
         return "pozdrav!";
     }
 
+    @PostMapping("/generateCSR")
+    public ResponseEntity<String> handleFormData(@RequestBody FormData formData) throws Exception {
+        // Process formData and generate CSR
+//        String csr = generateCSRFromFormData(formData);
+        System.out.println(formData);
+        // Send the CSR back to the frontend
+        korisnikServis.generateCertificate(formData);
 
+        return ResponseEntity.ok("Form data received successfully!");
+    }
+    @PostMapping("/revoke")
+    public ResponseEntity<String> revoke(@RequestBody Long id) throws Exception {
+        // Process formData and generate CSR
+//        String csr = generateCSRFromFormData(formData);
+         korisnikServis.revoke(id);
+
+        return ResponseEntity.ok("Form data received successfully!");
+    }
+    @GetMapping("/crt")
+    public ResponseEntity<List<CrtCertificate>> getCsrData() throws Exception {
+        // Process formData and generate CSR
+//        String csr = generateCSRFromFormData(formData);
+        List<CrtCertificate> li=korisnikServis.getCertificates();
+
+
+        return ResponseEntity.ok(li);
+    }
     @GetMapping("/all")
     public ResponseEntity<List<Korisnik>> prikaziSveRadnike(){
-        List<Korisnik> li=radnikServis.pronadjiSveRadnike();
+        List<Korisnik> li= korisnikServis.pronadjiSveRadnike();
         return new ResponseEntity<>(li, HttpStatus.OK);
     }
 
     @GetMapping("/find/{id}")
     public ResponseEntity<Korisnik> getRadnikById(@PathVariable("id") Long id){
-        Korisnik radnik=radnikServis.pronadjiPoId(id);
+        Korisnik radnik= korisnikServis.pronadjiPoId(id);
         return new ResponseEntity<>(radnik, HttpStatus.OK);
     }
     @PostMapping("/add")
     public ResponseEntity<Korisnik> dodajRadnik(@RequestBody Korisnik radnik){
         String encoded=encoder.encode(radnik.getLozinka());
         radnik.setLozinka(encoded);
-        Korisnik radnik1=radnikServis.dodajRadnika(radnik);
+        Korisnik radnik1= korisnikServis.dodajRadnika(radnik);
         return new ResponseEntity<>(radnik1, HttpStatus.CREATED);
 
     }
 
     @PutMapping("/update")
     public ResponseEntity<Korisnik> updateRadnik(@RequestBody Korisnik radnik){
-        Korisnik radnik1=radnikServis.izmeniRadnika(radnik);
+        Korisnik radnik1= korisnikServis.izmeniRadnika(radnik);
         return new ResponseEntity<>(radnik1, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
     @ResponseBody
     public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long id) {
-        radnikServis.izbrisiRadnika(id);
+        korisnikServis.izbrisiRadnika(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @PostMapping("/login")

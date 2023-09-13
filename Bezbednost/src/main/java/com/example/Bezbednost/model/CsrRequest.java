@@ -2,10 +2,11 @@ package com.example.Bezbednost.model;
 
 
 
-import jakarta.persistence.*;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -18,6 +19,9 @@ public class CsrRequest {
     @GeneratedValue(strategy = GenerationType.AUTO) // Use AUTO or SEQUENCE
     @Column(nullable = false, updatable = false)
     private String email;
+
+
+
     private String firstName;
     private String lastName;
     private LocalDateTime timestamp;

@@ -1,0 +1,26 @@
+<div>
+<table >
+  <tr>
+    <th>Common name</th>
+    <th>Org name</th>
+    <th>Org unit</th>
+    <th>Locality name</th>
+    <th>State name</th>
+    <th>Country name</th>
+    <th>Valid</th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let row of data">
+    <td>{{row.commonName}}</td>
+    <td>{{row.organizationName}}</td>
+    <td>{{row.organizationUnit}}</td>
+    <td>{{row.localityName}}</td>
+    <td>{{row.stateName}}</td>
+    <td>{{row.countryName}}</td>
+    <td>{{row.valid}}</td>
+    <td><button *ngIf="row.valid" (click)="revoke(row)">revoke</button></td>
+  </tr>
+
+</table>
+
+</div>

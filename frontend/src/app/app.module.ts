@@ -12,11 +12,13 @@ import {RouterModule, Routes} from "@angular/router";
 import { AdminComponent } from './admin/admin.component';
 import { UserComponent } from './user/user.component';
 import { CsrrequestComponent } from './csrrequest/csrrequest.component';
+import { ShowCSRDataComponent } from './show-csrdata/show-csrdata.component';
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'user', component: UserComponent },
   { path: 'csrrequests', component: CsrrequestComponent },
+  { path: 'show', component: ShowCSRDataComponent },
 
 ];
 @NgModule({
@@ -25,7 +27,8 @@ const routes: Routes = [
     LoginComponent,
     AdminComponent,
     UserComponent,
-    CsrrequestComponent
+    CsrrequestComponent,
+    ShowCSRDataComponent
 
   ],
   imports: [

@@ -5,6 +5,8 @@ import com.example.Bezbednost.model.Korisnik;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Repository
 public interface KorisnikRepo extends JpaRepository<Korisnik,Long> {
     Korisnik getKorisnikByEmail(String email);
